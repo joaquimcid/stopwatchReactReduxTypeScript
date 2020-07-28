@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/stopwatch/node_modules
+/stopwatch/.pnp
+/stopwatch.pnp.js
+
+# testing
+/stopwatch/coverage
+
+# production
+/stopwatch/build
+
+# misc
+/stopwatch/.DS_Store
+/stopwatch/.env.local
+/stopwatch/.env.development.local
+/stopwatch/.env.test.local
+/stopwatch/.env.production.local
+
+/stopwatch/npm-debug.log*
+/stopwatch/yarn-debug.log*
+/stopwatch/yarn-error.log*
