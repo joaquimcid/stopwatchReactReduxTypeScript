@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { reducerStopWatch } from './redux/reducers/StopWatchReducer';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+var store = createStore(() => reducerStopWatch());
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
