@@ -7,7 +7,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-var store = createStore(() => reducerStopWatch());
+var store = createStore(reducerStopWatch);
+
+  store.subscribe(() => {
+    console.log("index.tsx -> GetState: ");
+    console.log(store.getState()) 
+  });
 
 ReactDOM.render(
   <React.StrictMode>
