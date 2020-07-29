@@ -1,8 +1,12 @@
 import React from 'react';
 import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
+// import UserAction, {PauseAction} from '../redux/actions/UserAction';
+// import {useDispatch} from 'react-redux';
 
 function onButtonClick(action:string) {
-  // console.log(action);
+  //console.log(action);
+  // const dispatch = useDispatch();
+  // () => dispatch(PauseAction);
 }
 
 function newLapOrResetClicked (status:StopWatchStatusEnum) {

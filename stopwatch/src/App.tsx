@@ -8,13 +8,6 @@ import { StopWatchStatusEnum } from './redux/reducers/StopWatchStatusEnum';
 
 function App() {
 
-  // var store = createStore(() => reducerStopWatch());
-
-  // store.subscribe(() => {
-  //   console.log("Subscribe: ");
-  //   console.log(store.getState()) 
-  // });
-
   // console.log("dispatch to LITERAL PAUSED");
   // store.dispatch({ type: 'PAUSE'});
 
