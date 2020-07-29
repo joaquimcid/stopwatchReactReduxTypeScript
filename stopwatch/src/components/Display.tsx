@@ -3,5 +3,5 @@ interface ValueToShow {
   value: string;
 }
 export default function Display (props:ValueToShow){
-  return ( <div className="display">{props.value}</div>) 
+  return ( <div id="display" className ="display">{props.value}</div>) 
 }
