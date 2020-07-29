@@ -1,7 +1,8 @@
-import lap from './Lap';
+import lap from '../../model/Lap';
+import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 
 export const initialState:stopWatchState = {
-  status: "INITIAL",
+  status: StopWatchStatusEnum.INITIAL,
   startedTime: 0,
   // pausedTime: null,
   laps: [],
@@ -9,7 +10,7 @@ export const initialState:stopWatchState = {
 };
 
 export interface stopWatchState {
-  status:string,
+  status:StopWatchStatusEnum,
   startedTime:number,
   pausedTime?:number,
   laps: lap[],

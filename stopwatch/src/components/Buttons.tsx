@@ -1,36 +1,37 @@
 import React from 'react';
+import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
 
 function onButtonClick(action:string) {
   console.log(action);
 }
 
-function newLapOrResetClicked (status:string) {
-  if (status === 'PAUSED') {
+function newLapOrResetClicked (status:StopWatchStatusEnum) {
+  if (status === StopWatchStatusEnum.PAUSED) {
     console.log('LAP_RESET_BTN: PAUSED -> RESET');
     return onButtonClick('RESET');
   }
 
-  if(status === 'STARTED') {
+  if(status === StopWatchStatusEnum.STARTED) {
     console.log('LAP_RESET_BTN: STARTED -> NEWLAP');
     return onButtonClick('NEWLAP');
   }
 };
 
-function startOrPauseClicked(status:string) {
+function startOrPauseClicked(status:StopWatchStatusEnum) {
  
-  if(status === 'INITIAL')
+  if(status === StopWatchStatusEnum.INITIAL)
   {
     console.log('START_PAUSE_BTN: INITIAL -> START');
     return onButtonClick('START');
   }
 
-  if (status === 'PAUSED')
+  if (status === StopWatchStatusEnum.PAUSED)
   {
     console.log('START_PAUSE_BTN: PAUSED -> CONTINUE');
     return onButtonClick('CONTINUE');
   }
 
-  if(status === 'STARTED')
+  if(status === StopWatchStatusEnum.STARTED)
   {
     console.log('START_PAUSE_BTN: STARTED -> PAUSE');
     return onButtonClick('PAUSE');
@@ -38,7 +39,7 @@ function startOrPauseClicked(status:string) {
 };
 
 interface ButtonsProps {
-  status:string;
+  status:StopWatchStatusEnum;
 }
 
 export default function Buttons(props:ButtonsProps) {
@@ -49,12 +50,12 @@ export default function Buttons(props:ButtonsProps) {
       <button id="lapResetBtn" 
               onClick = {() => newLapOrResetClicked(props.status)} 
               className={`button buttonLapWhen${props.status}`}>   
-              { props.status === "PAUSED" ? "Reset" : "Lap"} </button>
+              { props.status === StopWatchStatusEnum.PAUSED ? "Reset" : "Lap"} </button>
       
       <button id="startStopBtn" 
               onClick = {() => startOrPauseClicked(props.status)} 
               className={`button buttonStartWhen${props.status}`}>
-                { props.status === "STARTED" ? "Stop" : "Start" } </button>
+                { props.status === StopWatchStatusEnum.STARTED ? "Stop" : "Start" } </button>
       
       {props.status}
   </div>

@@ -1,8 +1,9 @@
 
 import { initialState, stopWatchState } from './StopWatchState';
-import userAction, { StartAction, ContinueAction, InitialAction, NewLapAction, PauseAction, ResetAction } from '../../actions/userAction';
+import UserAction, { StartAction, ContinueAction, NewLapAction, PauseAction, ResetAction } from '../actions/UserAction';
+import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 
-export function reducerStopWatch(currentState?:stopWatchState, action?:userAction) {
+export function reducerStopWatch(currentState?:stopWatchState, action?:UserAction) {
   console.log(action);
   console.log(currentState);
 
@@ -13,7 +14,7 @@ export function reducerStopWatch(currentState?:stopWatchState, action?:userActio
   switch(action?.type) {
     case StartAction.type:
       return {
-          status: "STARTED",
+          status: StopWatchStatusEnum.STARTED,
           startedTime: Date.now(),
           pausedTime: null,
           laps: [],
@@ -22,7 +23,7 @@ export function reducerStopWatch(currentState?:stopWatchState, action?:userActio
 
     case PauseAction.type:
       return {
-          status: "PAUSED",      
+          status: StopWatchStatusEnum.PAUSED,      
           startedTime: currentState.startedTime,
           pausedTime: Date.now(),
           laps: currentState.laps,
@@ -32,7 +33,7 @@ export function reducerStopWatch(currentState?:stopWatchState, action?:userActio
     case ContinueAction.type:
       let updateStartedTime = currentState.startedTime + Date.now() - (currentState.pausedTime || 0);
       return {
-          status: "STARTED",
+          status: StopWatchStatusEnum.STARTED,
           startedTime: updateStartedTime,
           pausedTime: null,
           laps: currentState.laps,
@@ -50,14 +51,13 @@ export function reducerStopWatch(currentState?:stopWatchState, action?:userActio
       } 
 
       return {
-          status: "STARTED",
+          status: StopWatchStatusEnum.STARTED,
           startedTime: currentState.startedTime,
           pausedTime: null,
           laps: currentState.laps.concat(newLap),
           sumOfLaps: currentState.sumOfLaps+currentLapTime
         };
 
-    case InitialAction.type:
     case ResetAction.type:
       return initialState;
     default: return currentState;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Display from'./Display';
-import FormatMilliSeconds from './FormatMilliSeconds';
+import FormatMilliSeconds from '../converter/FormatMilliSeconds';
 
 interface ElapsedTimeProps {
   whenStartedTime: number;
