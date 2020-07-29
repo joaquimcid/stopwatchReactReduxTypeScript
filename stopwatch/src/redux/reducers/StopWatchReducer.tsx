@@ -1,11 +1,11 @@
 
-import { initialState, stopWatchState } from './StopWatchState';
+import {initialState, stopWatchState } from './StopWatchState';
 import UserAction, { StartAction, ContinueAction, NewLapAction, PauseAction, ResetAction } from '../actions/UserAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 
 export function reducerStopWatch(currentState?:stopWatchState, action?:UserAction) {
-  console.log(action);
-  console.log(currentState);
+  // console.log(action);
+  // console.log(currentState);
 
   if (!currentState) return initialState;
 

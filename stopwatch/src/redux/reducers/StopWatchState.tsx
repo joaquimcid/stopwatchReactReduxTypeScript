@@ -16,3 +16,15 @@ export interface stopWatchState {
   laps: lap[],
   sumOfLaps: number,
 }
+
+// export default function InitialStopWatchStateValue () {
+//   const init:stopWatchState = {
+//     status: StopWatchStatusEnum.STARTED,
+//     startedTime: 0,
+//     // pausedTime: null,
+//     laps: [],
+//     sumOfLaps: 0,
+//   }; 
+
+//   return init;
+// }

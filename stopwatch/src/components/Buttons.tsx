@@ -2,7 +2,7 @@ import React from 'react';
 import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
 
 function onButtonClick(action:string) {
-  console.log(action);
+  // console.log(action);
 }
 
 function newLapOrResetClicked (status:StopWatchStatusEnum) {
