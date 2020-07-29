@@ -1,10 +1,10 @@
-import './App.css';
 import React from 'react';
+import { createStore, Action } from 'redux';
+import './App.css';
 import ElapsedTimeDisplay from './components/ElapsedTimeDisplay';
 import Buttons from './components/Buttons';
 import LapsList from './components/LapsList';
-import { createStore } from 'redux'
-// import reducer from './components/State';
+
 
 interface lap {
   index: number;
@@ -13,7 +13,7 @@ interface lap {
   isMax: boolean;
 } 
 
-interface state {
+interface stopWatchState {
   status:string,
   startedTime:number,
   pausedTime?:number,
@@ -21,7 +21,11 @@ interface state {
   sumOfLaps: number,
 }
 
-const initialState:state = {
+interface userAction extends Action<string> {
+  type:string;
+}
+
+const initialState:stopWatchState = {
   status: "INITIAL",
   startedTime: 0,
   // pausedTime: null,
@@ -29,17 +33,15 @@ const initialState:state = {
   sumOfLaps: 0,
 };
 
-// export function reducer() {
-//   return reducer(initialState, '');
-// }
-
-function reducer(currentState?:state, action?:string) {
+function reducerStopWatch(currentState?:stopWatchState, action?:userAction) {
   console.log(action);
   console.log(currentState);
 
   if (!currentState) return initialState;
 
-  switch(action) {
+  if (!action) return initialState;
+
+  switch(action?.type) {
     case "START":
       return {
           status: "STARTED",
@@ -86,6 +88,7 @@ function reducer(currentState?:state, action?:string) {
           sumOfLaps: currentState.sumOfLaps+currentLapTime
         };
 
+    case "INITIAL":
     case "RESET":
       return initialState;
     default: return currentState;
@@ -93,23 +96,28 @@ function reducer(currentState?:state, action?:string) {
   
 }
 
+function createUserAction(actionName:string) {
+  const newAction:userAction = { type:actionName };
+  return newAction;
+}
+
 function App() {
 
-  var store = createStore((state, string) => reducer());
+  var store = createStore(() => reducerStopWatch(initialState, createUserAction('INITIAL')));
 
   // store.dispatch({ type: 'INITIAL'});
   console.log(store.getState());
-  store.dispatch(reducer('STARTED'));
-  store.dispatch({ type: 'STARTED'});
+  
+  store.dispatch(createUserAction('STARTED'));
   console.log(store.getState());
-  store.dispatch({ type: 'PAUSED'});
+  
+  store.dispatch(createUserAction('PAUSED'));
   console.log(store.getState());
 
-  
   // const elapsedTime = ElapsedTimeDisplay({whenStartedTime:''});
   /* status => INITIAL, STARTED, PAUSED */
   // const statusDummy = store.getState().status; 
-  const statusDummy = "INITIAL";
+  const statusDummy = store.getState().status;
   return (
     <div className="App">
       <ElapsedTimeDisplay whenStartedTime={4994} whenPausedTime={2} />
