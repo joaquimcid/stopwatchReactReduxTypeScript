@@ -1,5 +1,5 @@
 
-import {initialState, stopWatchState } from './StopWatchState';
+import {initialState, stopWatchState } from '../state/StopWatchState';
 import UserAction, { StartAction } from '../actions/UserAction';
 // import UserAction, { StartAction, ContinueAction, NewLapAction, PauseAction, ResetAction } from '../actions/UserAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
