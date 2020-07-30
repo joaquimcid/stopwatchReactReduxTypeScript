@@ -1,6 +1,7 @@
 
 import {initialState, stopWatchState } from './StopWatchState';
-import UserAction, { StartAction, ContinueAction, NewLapAction, PauseAction, ResetAction } from '../actions/UserAction';
+import UserAction, { StartAction } from '../actions/UserAction';
+// import UserAction, { StartAction, ContinueAction, NewLapAction, PauseAction, ResetAction } from '../actions/UserAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 
 export function reducerStopWatch(state = initialState, action: UserAction): stopWatchState {
