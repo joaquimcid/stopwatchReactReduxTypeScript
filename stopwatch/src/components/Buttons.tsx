@@ -1,10 +1,7 @@
 import React from 'react';
 import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
 import { useSelector } from 'react-redux';
-// import { currentStatus } from '../redux/selectors/statusSelector';
-// import UserAction, {PauseAction} from '../redux/actions/UserAction';
-// import { useDispatch, useSelector } from 'react-redux';
-import {statusSelector} from '../redux/selectors/statusSelector';
+import { statusSelector } from '../redux/selectors/statusSelector';
 
 function onButtonClick(action:string) {
   //console.log(action);
@@ -46,14 +43,9 @@ function startOrPauseClicked(status:StopWatchStatusEnum) {
   }
 };
 
-interface ButtonsProps {
-  status:StopWatchStatusEnum;
-}
-
 export default function Buttons() {
-  /* status => INITIAL, STARTED, PAUSED */
-  
   const status = useSelector(statusSelector);
+  /* status => INITIAL, STARTED, PAUSED */
 
   return (
     <div id="buttons" className ="buttons">
