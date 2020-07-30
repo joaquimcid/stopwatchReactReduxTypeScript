@@ -7,11 +7,11 @@ import UserAction,
   NewLapAction, 
   ResetAction } from '../actions/UserAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
-import log from '../../components/LogDebug';
+import log, { ComponentsEnum } from '../../components/LogDebug';
 
 export function reducerStopWatch(state = initialState, action: UserAction): stopWatchState {
-  log('Reducer received action ' + action);
-  log('Reducer received action type ' + action.type);
+  log(ComponentsEnum.Redux, 'Reducer received action ' + action);
+  log(ComponentsEnum.Redux, 'Reducer received action type ' + action.type);
 
   // if (!state) return initialState;
   // if (!action) return initialState;

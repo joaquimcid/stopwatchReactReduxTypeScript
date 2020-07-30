@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { statusSelector } from '../redux/selectors/statusSelector';
 import { useDispatch } from 'react-redux'
 import { StartAction, NewLapAction, ResetAction, ContinueAction, PauseAction } from '../redux/actions/UserAction';
-import log from './LogDebug';
+import log, { ComponentsEnum } from './LogDebug';
 
 export default function Buttons() {
   const status = useSelector(statusSelector);
@@ -12,12 +12,12 @@ export default function Buttons() {
   /* status => INITIAL, STARTED, PAUSED */
   function newLapOrResetClicked (status:StopWatchStatusEnum) {
     if (status === StopWatchStatusEnum.PAUSED) {
-      log('LAP_RESET_BTN: PAUSED -> Dispatch(RESET)');
+      log(ComponentsEnum.Buttons, 'LAP_RESET_BTN: PAUSED -> Dispatch(RESET)');
       return dispatch(ResetAction);
     }
   
     if(status === StopWatchStatusEnum.STARTED) {
-      log('LAP_RESET_BTN: STARTED -> Dispatch(NEWLAP)');
+      log(ComponentsEnum.Buttons, 'LAP_RESET_BTN: STARTED -> Dispatch(NEWLAP)');
       return dispatch(NewLapAction);
     }
   };
@@ -26,19 +26,19 @@ export default function Buttons() {
    
     if(status === StopWatchStatusEnum.INITIAL)
     {
-      log('START_PAUSE_BTN: INITIAL -> Dispatch(START)');
+      log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: INITIAL -> Dispatch(START)');
       return dispatch(StartAction);
     }
   
     if (status === StopWatchStatusEnum.PAUSED)
     {
-      log('START_PAUSE_BTN: PAUSED -> Dispatch(CONTINUE)');
+      log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: PAUSED -> Dispatch(CONTINUE)');
       return dispatch(ContinueAction);
     }
   
     if(status === StopWatchStatusEnum.STARTED)
     {
-      log('START_PAUSE_BTN: STARTED -> Dispatch(PAUSE)');
+      log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: STARTED -> Dispatch(PAUSE)');
       return dispatch(PauseAction);
     }
   };

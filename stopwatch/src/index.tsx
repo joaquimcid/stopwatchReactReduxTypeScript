@@ -7,12 +7,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import log from './components/LogDebug';
+import { ComponentsEnum } from './components/LogDebug';
 
 var store = createStore(reducerStopWatch);
 
 store.subscribe(() => {
-  log("index.tsx -> GetState: ");
-  log(store.getState()) 
+  log(ComponentsEnum.Redux, "index.tsx -> GetState: ");
+  log(ComponentsEnum.Redux, store.getState()) 
 });
 
 ReactDOM.render(

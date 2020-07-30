@@ -1,24 +1,27 @@
 import React from 'react';
 import Display from'./Display';
 import FormatMilliSeconds from '../converter/FormatMilliSeconds';
+import { useSelector } from 'react-redux';
+import { startedTimeSelector } from '../redux/selectors/startedTimeSelector';
+import { pausedTimeSelector } from '../redux/selectors/pausedTimeSelector';
+import log, { ComponentsEnum } from './LogDebug';
 
-interface ElapsedTimeProps {
-  whenStartedTime: number;
-  whenPausedTime: number;
-}
-
-function timeToShow(props:ElapsedTimeProps)
+function timeToShow( whenStartedTime: number, whenPausedTime: number|undefined)
 {
-  if (!props.whenStartedTime) return 0;
+  if (!whenStartedTime) return 0;
 
-  if (props.whenPausedTime !== null) return props.whenPausedTime-props.whenStartedTime;
+  if (!whenPausedTime || whenPausedTime !== null) return Date.now() - whenStartedTime;
   
-  return Date.now() - props.whenStartedTime;
+  return whenPausedTime!-whenStartedTime;
 }
 
-export default function ElapsedTimeDisplay(props:ElapsedTimeProps)
+export default function ElapsedTimeDisplay()
 { 
-  const valueToDisplay = FormatMilliSeconds(timeToShow(props)); 
+  const startedTime = useSelector(startedTimeSelector);
+  const pausedTime = useSelector(pausedTimeSelector);
+
+  const valueToDisplay = FormatMilliSeconds(timeToShow(startedTime, pausedTime)); 
+  log(ComponentsEnum.ElapsedTimeDisplay, `elapsedTimeDisplay: valueToDisplay: ${valueToDisplay}, startedTime: ${startedTime}, pausedTime: ${pausedTime}`);
   
   return (
     <div className="elapsedTime">

@@ -1,17 +1,15 @@
 import React from 'react';
-import lap from '../model/Lap';
 import FormatMilliSeconds from '../converter/FormatMilliSeconds';
-import log from './LogDebug';
+import log, { ComponentsEnum } from './LogDebug';
+import { useSelector } from 'react-redux';
+import { lapsSelector } from '../redux/selectors/lapsSelector';
 
-interface LapsProp {
-  laps:lap[];
-}
+export default function LapsList(){
+  const laps = useSelector(lapsSelector);
 
-export default function LapsList(props:LapsProp){
-
-  log('laps component');
+  log(ComponentsEnum.LapsList, 'laps component');
   
-  const listItems = props.laps.map((item, index, array) =>
+  const listItems = laps.map((item, index, array) =>
     <li key={index}>Lap {item.index}__________{FormatMilliSeconds(item.totalTime)}__________{item.totalTime}</li>
   );
 
