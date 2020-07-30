@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Display from'./Display';
 import FormatMilliSeconds from '../converter/FormatMilliSeconds';
 import { useSelector } from 'react-redux';
@@ -19,13 +19,21 @@ export default function ElapsedTimeDisplay()
 { 
   const startedTime = useSelector(startedTimeSelector);
   const pausedTime = useSelector(pausedTimeSelector);
-
-  const valueToDisplay = FormatMilliSeconds(timeToShow(startedTime, pausedTime)); 
-  log(ComponentsEnum.ElapsedTimeDisplay, `elapsedTimeDisplay: valueToDisplay: ${valueToDisplay}, startedTime: ${startedTime}, pausedTime: ${pausedTime}`);
+  const timeToShowInMilliSeconds = timeToShow(startedTime, pausedTime);
+  const valueToDisplayPretty = FormatMilliSeconds(timeToShowInMilliSeconds);
+  
+  const [value, setValue] = useState(valueToDisplayPretty);
+  useEffect(() => {
+    const request = requestAnimationFrame(() => {
+      log(ComponentsEnum.ElapsedTimeDisplay, `elapsedTimeDisplay ${valueToDisplayPretty}. timeToShowInMilliSeconds: ${timeToShowInMilliSeconds}, startedTime: ${startedTime}, pausedTime: ${pausedTime}`);
+      setValue(FormatMilliSeconds(timeToShow(startedTime, pausedTime)));
+    });
+    return () => cancelAnimationFrame(request);
+  });
   
   return (
     <div className="elapsedTime">
-      <Display value={valueToDisplay} />
+      <Display value={value} />
     </div>
   );
 }
