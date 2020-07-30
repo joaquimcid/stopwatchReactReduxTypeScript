@@ -1,8 +1,7 @@
 
-const isDebugMode:boolean = true;
+const isDebugMode:boolean = false;
 export enum ComponentsEnum {
   Buttons = "Buttons",
-  Display = "Display",
   ElapsedTimeDisplay ="ElapsedTimeDisplay",
   LapsList="LapsList",
   Redux="Redux",
