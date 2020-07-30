@@ -1,10 +1,10 @@
 import React from 'react';
 import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
 import { useSelector } from 'react-redux';
-
 // import { currentStatus } from '../redux/selectors/statusSelector';
 // import UserAction, {PauseAction} from '../redux/actions/UserAction';
 // import { useDispatch, useSelector } from 'react-redux';
+import {statusSelector} from '../redux/selectors/statusSelector';
 
 function onButtonClick(action:string) {
   //console.log(action);
@@ -50,32 +50,23 @@ interface ButtonsProps {
   status:StopWatchStatusEnum;
 }
 
-export default function Buttons(props:ButtonsProps) {
+export default function Buttons() {
   /* status => INITIAL, STARTED, PAUSED */
-
-  interface RootState {
-    status:StopWatchStatusEnum,
-  }
-
-  const selectStatus = (state: RootState) => state.status
-
-  const currentStatus = useSelector(selectStatus);
   
-  const status = currentStatus;
+  const status = useSelector(statusSelector);
 
   return (
     <div id="buttons" className ="buttons">
       <button id="lapResetBtn" 
-              onClick = {() => newLapOrResetClicked(props.status)} 
-              className={`button buttonLapWhen${props.status}`}>   
-              { props.status === StopWatchStatusEnum.PAUSED ? "Reset" : "Lap"} </button>
+              onClick = {() => newLapOrResetClicked(status)} 
+              className={`button buttonLapWhen${status}`}>   
+              { status === StopWatchStatusEnum.PAUSED ? "Reset" : "Lap"} </button>
       
       <button id="startStopBtn" 
-              onClick = {() => startOrPauseClicked(props.status)} 
-              className={`button buttonStartWhen${props.status}`}>
-                { props.status === StopWatchStatusEnum.STARTED ? "Stop" : "Start" } </button>
+              onClick = {() => startOrPauseClicked(status)} 
+              className={`button buttonStartWhen${status}`}>
+                { status === StopWatchStatusEnum.STARTED ? "Stop" : "Start" } </button>
       {status}
-      {props.status}
   </div>
   );
 }

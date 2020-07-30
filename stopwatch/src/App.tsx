@@ -4,7 +4,6 @@ import ElapsedTimeDisplay from './components/ElapsedTimeDisplay';
 import Buttons from './components/Buttons';
 import LapsList from './components/LapsList';
 import lap from './model/Lap';
-import { StopWatchStatusEnum } from './redux/reducers/StopWatchStatusEnum';
 
 function App() {
 
@@ -23,13 +22,12 @@ function App() {
   // store.dispatch(PauseAction);
   // // console.log(store.getState());
 
-  const statusDummy = StopWatchStatusEnum.INITIAL; 
   const lapsDummy:lap[] = [];
   
   return (
     <div className="App">
       <ElapsedTimeDisplay whenStartedTime={2} whenPausedTime={4994} />
-      <Buttons status={statusDummy}/>
+      <Buttons />
       <LapsList laps={lapsDummy} />
     </div>
   );
