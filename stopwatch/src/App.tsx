@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ElapsedTimeDisplay from './components/ElapsedTimeDisplay';
+import Buttons from './components/Buttons';
+import LapsList from './components/LapsList';
+import { useSelector } from 'react-redux';
+import { startedTimeSelector } from './redux/selectors/startedTimeSelector';
+import { pausedTimeSelector } from './redux/selectors/pausedTimeSelector';
 
 function App() {
+  const startedTime:number = useSelector(startedTimeSelector);
+  const pausedTime:number | undefined = useSelector(pausedTimeSelector);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ElapsedTimeDisplay startedTime={startedTime} pausedTime={pausedTime} />
+      <Buttons />
+      <LapsList />
     </div>
   );
 }
