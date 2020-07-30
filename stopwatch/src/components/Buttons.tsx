@@ -1,13 +1,17 @@
 import React from 'react';
 import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
+import { useSelector } from 'react-redux';
+
+// import { currentStatus } from '../redux/selectors/statusSelector';
 // import UserAction, {PauseAction} from '../redux/actions/UserAction';
-// import {useDispatch} from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 
 function onButtonClick(action:string) {
   //console.log(action);
   // const dispatch = useDispatch();
   // () => dispatch(PauseAction);
 }
+
 
 function newLapOrResetClicked (status:StopWatchStatusEnum) {
   if (status === StopWatchStatusEnum.PAUSED) {
@@ -49,6 +53,16 @@ interface ButtonsProps {
 export default function Buttons(props:ButtonsProps) {
   /* status => INITIAL, STARTED, PAUSED */
 
+  interface RootState {
+    status:StopWatchStatusEnum,
+  }
+
+  const selectStatus = (state: RootState) => state.status
+
+  const currentStatus = useSelector(selectStatus);
+  
+  const status = currentStatus;
+
   return (
     <div id="buttons" className ="buttons">
       <button id="lapResetBtn" 
@@ -60,7 +74,7 @@ export default function Buttons(props:ButtonsProps) {
               onClick = {() => startOrPauseClicked(props.status)} 
               className={`button buttonStartWhen${props.status}`}>
                 { props.status === StopWatchStatusEnum.STARTED ? "Stop" : "Start" } </button>
-      
+      {status}
       {props.status}
   </div>
   );
