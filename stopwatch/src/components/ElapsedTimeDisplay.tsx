@@ -2,13 +2,10 @@ import React, {useState, useEffect} from 'react';
 import Display from'./Display';
 import FormatMilliSeconds from '../converter/FormatMilliSeconds';
 import log, { ComponentsEnum } from './LogDebug';
-import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
 import IHavePausedTime from '../redux/state/IHavePausedTime';
-import IHaveStatus from '../redux/state/IHaveStatus';
 import IHaveStartedTime from '../redux/state/IHaveStartedTime';
 
 interface ElapsedTimeDisplayProps extends 
-  IHaveStatus,
   IHaveStartedTime,
   IHavePausedTime{
 }
@@ -21,19 +18,22 @@ export default function ElapsedTimeDisplay(props:ElapsedTimeDisplayProps)
 
   useEffect(() => {
     const request = requestAnimationFrame(() => {
-      
-      if (props.status === StopWatchStatusEnum.PAUSED) {
-        log(ComponentsEnum.ElapsedTimeDisplay, ` Status: ${props.status}, Value: ${props.pausedTime! - props.startedTime}`);
-        setValue(props.pausedTime! - props.startedTime);          
-      } else if(props.status === StopWatchStatusEnum.STARTED)
+      // INITAL
+      if(props.startedTime === 0)
       {
-        log(ComponentsEnum.ElapsedTimeDisplay, ` Status: ${props.status}, Value: ${Date.now() - props.startedTime}`);
-        setValue(Date.now() - props.startedTime);
-      } else {
-        log(ComponentsEnum.ElapsedTimeDisplay, ` Status: ${props.status}, Value: ${0}`);
+        log(ComponentsEnum.ElapsedTimeDisplay, ` Status: INITAL, Value: ${0}`);
         setValue(0);
       }
-      
+      // PAUSED
+      else if (!!props.pausedTime) {
+        log(ComponentsEnum.ElapsedTimeDisplay, ` Status: PAUSED, Value: ${props.pausedTime! - props.startedTime}`);
+        setValue(props.pausedTime! - props.startedTime);  
+      }
+      // STARTED
+      else {
+        log(ComponentsEnum.ElapsedTimeDisplay, ` Status: STARTED, Value: ${Date.now() - props.startedTime}`);
+        setValue(Date.now() - props.startedTime);
+      }
     });
     return () => cancelAnimationFrame(request);
   });
