@@ -1,6 +1,7 @@
 import React from 'react';
 import lap from '../model/Lap';
 import FormatMilliSeconds from '../converter/FormatMilliSeconds';
+import log from './LogDebug';
 
 interface LapsProp {
   laps:lap[];
@@ -8,7 +9,7 @@ interface LapsProp {
 
 export default function LapsList(props:LapsProp){
 
-  // console.log('laps component');
+  log('laps component');
   
   const listItems = props.laps.map((item, index, array) =>
     <li key={index}>Lap {item.index}__________{FormatMilliSeconds(item.totalTime)}__________{item.totalTime}</li>

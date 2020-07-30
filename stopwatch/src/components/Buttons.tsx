@@ -4,38 +4,21 @@ import { useSelector } from 'react-redux';
 import { statusSelector } from '../redux/selectors/statusSelector';
 import { useDispatch } from 'react-redux'
 import { StartAction, NewLapAction, ResetAction, ContinueAction, PauseAction } from '../redux/actions/UserAction';
-import UserAction from '../redux/actions/UserAction';
-
-
-
-
-
-
+import log from './LogDebug';
 
 export default function Buttons() {
   const status = useSelector(statusSelector);
   const dispatch = useDispatch();
-
-  function onButtonClick(action:UserAction) {
-    // {() => dispatch({ type: action })}
-  
-    console.log("onButtonClick, action to dispatch: " + action);
-    dispatch(action);
-    //console.log(action);
-    // const dispatch = useDispatch();
-    // () => dispatch(PauseAction);
-  }
-
   /* status => INITIAL, STARTED, PAUSED */
   function newLapOrResetClicked (status:StopWatchStatusEnum) {
     if (status === StopWatchStatusEnum.PAUSED) {
-      console.log('LAP_RESET_BTN: PAUSED -> RESET');
-      return onButtonClick(ResetAction);
+      log('LAP_RESET_BTN: PAUSED -> Dispatch(RESET)');
+      return dispatch(ResetAction);
     }
   
     if(status === StopWatchStatusEnum.STARTED) {
-      console.log('LAP_RESET_BTN: STARTED -> NEWLAP');
-      return onButtonClick(NewLapAction);
+      log('LAP_RESET_BTN: STARTED -> Dispatch(NEWLAP)');
+      return dispatch(NewLapAction);
     }
   };
   
@@ -43,20 +26,20 @@ export default function Buttons() {
    
     if(status === StopWatchStatusEnum.INITIAL)
     {
-      console.log('START_PAUSE_BTN: INITIAL -> START');
-      return onButtonClick(StartAction);
+      log('START_PAUSE_BTN: INITIAL -> Dispatch(START)');
+      return dispatch(StartAction);
     }
   
     if (status === StopWatchStatusEnum.PAUSED)
     {
-      console.log('START_PAUSE_BTN: PAUSED -> CONTINUE');
-      return onButtonClick(ContinueAction);
+      log('START_PAUSE_BTN: PAUSED -> Dispatch(CONTINUE)');
+      return dispatch(ContinueAction);
     }
   
     if(status === StopWatchStatusEnum.STARTED)
     {
-      console.log('START_PAUSE_BTN: STARTED -> PAUSE');
-      return onButtonClick(PauseAction);
+      log('START_PAUSE_BTN: STARTED -> Dispatch(PAUSE)');
+      return dispatch(PauseAction);
     }
   };
 

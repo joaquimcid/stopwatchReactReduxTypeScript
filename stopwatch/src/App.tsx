@@ -6,22 +6,6 @@ import LapsList from './components/LapsList';
 import lap from './model/Lap';
 
 function App() {
-
-  // console.log("dispatch to LITERAL PAUSED");
-  // store.dispatch({ type: 'PAUSE'});
-
-  // console.log("dispatch to LITERAL PAUSED");
-  // store.dispatch({ type: UserActionEnum.PAUSE});
-  // // console.log(store.getState());
-  
-  // console.log("dispatch to START ACTION");
-  // store.dispatch(StartAction);
-  // // console.log(store.getState());
-  
-  // console.log("dispatch to PAUSE ACTION");
-  // store.dispatch(PauseAction);
-  // // console.log(store.getState());
-
   const lapsDummy:lap[] = [];
   
   return (
