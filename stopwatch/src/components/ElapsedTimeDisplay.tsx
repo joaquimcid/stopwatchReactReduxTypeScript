@@ -15,6 +15,9 @@ function timeToShow( whenStartedTime: number, whenPausedTime: number|undefined)
   return whenPausedTime!-whenStartedTime;
 }
 
+
+// TODO: Use effect to dont rerender with same value
+// is not stopping, we should subscribe when there are state change or paused/start times
 export default function ElapsedTimeDisplay()
 { 
   const startedTime = useSelector(startedTimeSelector);
