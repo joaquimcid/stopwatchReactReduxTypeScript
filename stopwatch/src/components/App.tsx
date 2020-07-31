@@ -1,11 +1,12 @@
 import React from 'react';
-import './App.css';
-import ElapsedTimeDisplay from './components/ElapsedTimeDisplay';
-import Buttons from './components/Buttons';
-import LapsList from './components/LapsList';
+import '../styles/css/App.css'
+// import '../styles/css/App.css';
+import ElapsedTimeDisplay from './ElapsedTimeDisplay';
+import Buttons from './Buttons';
+import LapsList from './LapsList';
 import { useSelector } from 'react-redux';
-import { startedTimeSelector } from './redux/selectors/startedTimeSelector';
-import { pausedTimeSelector } from './redux/selectors/pausedTimeSelector';
+import { startedTimeSelector } from '../redux/selectors/startedTimeSelector';
+import { pausedTimeSelector } from '../redux/selectors/pausedTimeSelector';
 
 function App() {
   const startedTime:number = useSelector(startedTimeSelector);

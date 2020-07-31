@@ -1,0 +1,115 @@
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url(../fonts/HelveticaNeue-UltraLight.otf) format('opentype');
+  font-weight: 600;
+  font-style: 'normal';
+}
+
+@font-face {
+  font-family: "Helvetica Neue Roman";
+  src: url(../fonts/HelveticaNeue-Roman.otf) format('opentype');
+}
+
+.app {
+  background-color: black;
+  color: white;
+}
+
+.indexHtml {
+  background-color: black;
+  color: white;
+}
+
+.container { 
+  width: 400px;
+	height: 500px; 
+	
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
+  margin: auto;
+}
+
+.display {
+  color:white;
+  font-size: 100px;
+  font-family: "Helvetica Neue";
+  src: url(../fonts/HelveticaNeue-UltraLight.otf) format('opentype');
+  font-weight: 600;
+  font-style: 'normal';
+  text-align: center;
+}
+
+.buttons {
+  margin-top: 70px;
+}
+
+.button {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  height: 80px;
+  width: 80px;
+  border-style: double;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 50%;
+}
+
+.buttonStart {
+  background-color: #27380e;
+  color: #72c250;
+  float: right;
+}
+/* 
+INITIAL
+STARTED
+PAUSED */
+
+.buttonStartWhenINITIAL, .buttonStartWhenPAUSED {
+  background-color: #27380e;
+  color: #72c250;
+  float: right;
+}
+
+.buttonStartWhenSTARTED {
+  background-color: #4f140c;
+  color: #e93c20;
+  float: right;
+}
+
+.buttonLapWhenINITIAL {
+  background-color: #1d1d1d;
+  color: #a6a6a6;
+}
+
+.buttonLapWhenSTARTED, .buttonLapWhenPAUSED {
+  background-color: #646464;
+  color: #ffffff;
+}
+
+.lapRecord {
+  color: white;
+}
+
+.lapRecordMinium {
+  color: green;
+}
+
+.lapRecordMaxium {
+  color: red;
+}
+
+.lapRecordLabel {
+  float: left;
+}
+
+.lapRecordValue {
+  float: right;
+}
