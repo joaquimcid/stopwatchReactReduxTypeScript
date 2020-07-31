@@ -1,2 +1,2 @@
-import IHaveSumOfLaps from '../state/IHaveSumOfLaps';
-export const sumOfLapsSelector = (state: IHaveSumOfLaps) => state.sumOfLaps;
+import IHaveLaps from '../state/IHaveLaps';
+export const sumOfLapsSelector = (state: IHaveLaps) => state.laps.sumOfLaps;

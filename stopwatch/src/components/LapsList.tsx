@@ -7,26 +7,34 @@ import { lapsSelector } from '../redux/selectors/lapsSelector';
 
 interface lapRecordProps {
   index:number,
-  // value:string,
   milliSeconds:number,
+  isMinValue:boolean,
+  isMaxValue:boolean,
 }
 
 function LapRecord(lapRecord:lapRecordProps) {
-  return (<li key={lapRecord.index}>
+  let classMinMaxValue = lapRecord.isMaxValue ? "lapRecordMaxium" : "";
+  classMinMaxValue = lapRecord.isMinValue ? "lapRecordMinium" : classMinMaxValue;
+
+  return (<li key={lapRecord.index} className={classMinMaxValue}>
             <div className="lapRecordLabel">Lap {lapRecord.index}</div>
             <div className="lapRecordValue">{FormatMilliSeconds(lapRecord.milliSeconds)}</div>
           </li>);
 
 }
 
-
 export default function LapsList(){
   const laps = useSelector(lapsSelector);
 
   log(ComponentsEnum.LapsList, 'laps component');
+  log(ComponentsEnum.LapsList, laps);
   
-  const listItems = laps.map((item, index, array) =>
-    <LapRecord index={index+1} milliSeconds={item.totalTime} />
+  const listItems = laps.records.map((item, index, array) =>
+    <LapRecord key={item.index}
+               index={item.index} 
+               milliSeconds={item.totalTime} 
+               isMinValue={laps.minValueIndex === index} 
+               isMaxValue={laps.maxValueIndex === index}/>
   );
 
   return <div className="laps"><ul>{listItems}</ul></div>;

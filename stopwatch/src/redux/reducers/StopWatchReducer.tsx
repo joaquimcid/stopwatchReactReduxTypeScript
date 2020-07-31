@@ -8,6 +8,7 @@ import UserAction,
   ResetAction } from '../actions/UserAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 import log, { ComponentsEnum } from '../../components/LogDebug';
+import { lapsList, emptyLapsList } from '../state/IHaveLaps';
 
 export function reducerStopWatch(state = initialState, action: UserAction): stopWatchState {
   log(ComponentsEnum.Redux, 'Reducer received action ' + action);
@@ -20,8 +21,7 @@ export function reducerStopWatch(state = initialState, action: UserAction): stop
       return {
         status: StopWatchStatusEnum.STARTED,
         startedTime: Date.now(),
-        laps: [],
-        sumOfLaps: state.sumOfLaps
+        laps: emptyLapsList,
       };
     }
     case PauseAction:
@@ -30,7 +30,6 @@ export function reducerStopWatch(state = initialState, action: UserAction): stop
           startedTime: state.startedTime,
           pausedTime: Date.now(),
           laps: state.laps,
-          sumOfLaps: state.sumOfLaps
         };
         
     case ContinueAction:
@@ -39,24 +38,26 @@ export function reducerStopWatch(state = initialState, action: UserAction): stop
           status: StopWatchStatusEnum.STARTED,
           startedTime: updateStartedTime,
           laps: state.laps,
-          sumOfLaps: state.sumOfLaps
         };
 
     case NewLapAction:
-      const currentLapTime = Date.now()-state.startedTime-state.sumOfLaps;
-
+      const currentLapTime = Date.now()-state.startedTime-state.laps.sumOfLaps;
       const newLap = {
-        index: state.laps.length+1,
+        index: state.laps.records.length+1,
         totalTime: currentLapTime,
-        isMin: false,
-        isMax: false,
-      } 
-
+      }
+      const newRecords = state.laps.records.concat(newLap);
+      // TODO GET INDEX OF MIN AND MAX LAP
+      const newLapsList:lapsList = {
+        records:newRecords, 
+        sumOfLaps:state.laps.sumOfLaps+currentLapTime, 
+        minValueIndex:newRecords.reduce((iMin, x, i, arr) => x.totalTime < arr[iMin].totalTime ? i : iMin, 0), 
+        maxValueIndex:newRecords.reduce((iMin, x, i, arr) => x.totalTime > arr[iMin].totalTime ? i : iMin, 0)
+      }
       return {
           status: StopWatchStatusEnum.STARTED,
           startedTime: state.startedTime,
-          laps: state.laps.concat(newLap),
-          sumOfLaps: state.sumOfLaps+currentLapTime
+          laps: newLapsList,
         };
 
     case ResetAction:
