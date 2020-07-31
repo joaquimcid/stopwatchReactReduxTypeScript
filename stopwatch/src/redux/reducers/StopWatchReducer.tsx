@@ -47,7 +47,6 @@ export function reducerStopWatch(state = initialState, action: UserAction): stop
         totalTime: currentLapTime,
       }
       const newRecords = state.laps.records.concat(newLap);
-      // TODO GET INDEX OF MIN AND MAX LAP
       const newLapsList:lapsList = {
         records:newRecords, 
         sumOfLaps:state.laps.sumOfLaps+currentLapTime, 
