@@ -8,8 +8,9 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import log from './components/LogDebug';
 import { ComponentsEnum } from './components/LogDebug';
+import { initialState } from './redux/state/StopWatchState';
 
-var store = createStore(reducerStopWatch);
+var store = createStore(reducerStopWatch, initialState);
 
 store.subscribe(() => {
   log(ComponentsEnum.Redux, "index.tsx -> GetState: ");
