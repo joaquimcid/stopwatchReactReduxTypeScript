@@ -1,4 +1,3 @@
-
 const isDebugMode:boolean = true;
 export enum ComponentsEnum {
   Buttons = "Buttons",
@@ -9,13 +8,23 @@ export enum ComponentsEnum {
 }
 const isDebugOnlyComponents:ComponentsEnum[] = [ComponentsEnum.LoggerMiddleWare];
 
+function isValid(component:ComponentsEnum):boolean {
+  if (!isDebugMode) return false;
+
+  return (isDebugOnlyComponents.length === 0 || isDebugOnlyComponents.indexOf(component) > -1);
+}
+
 export default function log(component:ComponentsEnum, message?: any, ...optionalParams: any[]): void {
-  if (isDebugMode)
+  if (isValid(component))
   {
-    if (isDebugOnlyComponents.length === 0 || isDebugOnlyComponents.indexOf(component) > -1)
-    {
       console.log(`${component}:${message}`, ...optionalParams);
-      // console.log();
-    }
   }
+}
+
+export function logGroup(component:ComponentsEnum, ...label: any[]): void {
+  if (isValid(component)) console.group(label);
+}
+
+export function logGroupEnd(component:ComponentsEnum): void {
+  if (isValid(component)) console.groupEnd();
 }
