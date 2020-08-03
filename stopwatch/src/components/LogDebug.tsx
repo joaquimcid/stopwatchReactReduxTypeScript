@@ -5,6 +5,7 @@ export enum ComponentsEnum {
   ElapsedTimeDisplay ="ElapsedTimeDisplay",
   LapsList="LapsList",
   Redux="Redux",
+  LoggerMiddleWare="LoggerMiddleWare",
 }
 const isDebugOnlyComponents:ComponentsEnum[] = [ComponentsEnum.ElapsedTimeDisplay];
 
