@@ -1,2 +1,2 @@
-import IHaveStatus from '../state/IHaveStatus';
-export const statusSelector = (state: IHaveStatus) => state.status
+import IStatusState from '../state/IStatusState';
+export const statusSelector = (state: IStatusState) => state.status

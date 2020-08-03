@@ -1,2 +1,2 @@
-import IHaveStartedTime from '../state/IHaveStartedTime';
-export const startedTimeSelector = (state: IHaveStartedTime) => state.startedTime;
+import IStartedTimeState from '../state/IStartedTimeState';
+export const startedTimeSelector = (state: IStartedTimeState) => state.startedTime;

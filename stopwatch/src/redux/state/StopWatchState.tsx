@@ -1,8 +1,8 @@
 import { StopWatchStatusEnum } from '../reducers/StopWatchStatusEnum';
-import IHaveStatus from './IHaveStatus';
-import IHaveStartedTime from './IHaveStartedTime';
-import IHavePausedTime from './IHavePausedTime';
-import IHaveLaps, {emptyLapsList} from './IHaveLaps';
+import IStatusState from './IStatusState';
+import IStartedTimeState from './IStartedTimeState';
+import IPausedTimeState from './IPausedTimeState';
+import ILapsState, {emptyLapsList} from './ILapsState';
 
 export const initialState:stopWatchState = {
   status: StopWatchStatusEnum.INITIAL,
@@ -11,7 +11,7 @@ export const initialState:stopWatchState = {
 };
 
 export interface stopWatchState extends
-  IHaveStatus,
-  IHaveStartedTime,
-  IHavePausedTime,
-  IHaveLaps  {  }
+  IStatusState,
+  IStartedTimeState,
+  IPausedTimeState,
+  ILapsState  {  }

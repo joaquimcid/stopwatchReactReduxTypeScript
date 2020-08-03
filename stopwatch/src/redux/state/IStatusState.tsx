@@ -1,5 +1,5 @@
 import { StopWatchStatusEnum } from '../reducers/StopWatchStatusEnum';
 
-export default interface IHaveStatus {
+export default interface IStatusState {
   status:StopWatchStatusEnum,
 }

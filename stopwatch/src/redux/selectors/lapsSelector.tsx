@@ -1,2 +1,2 @@
-import IHaveLaps from '../state/IHaveLaps';
-export const lapsSelector = (state: IHaveLaps) => state.laps;
+import ILapsState from '../state/ILapsState';
+export const lapsSelector = (state: ILapsState) => state.laps;

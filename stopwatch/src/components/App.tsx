@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/css/App.css'
-// import '../styles/css/App.css';
 import ElapsedTimeDisplay from './ElapsedTimeDisplay';
 import Buttons from './Buttons';
 import LapsList from './LapsList';

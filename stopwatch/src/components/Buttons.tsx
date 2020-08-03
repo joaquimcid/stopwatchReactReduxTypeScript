@@ -54,7 +54,6 @@ export default function Buttons() {
               onClick = {() => startOrPauseClicked(status)} 
               className={`button buttonStartWhen${status}`}>
                 { status === StopWatchStatusEnum.STARTED ? "Stop" : "Start" } </button>
-      {status}
   </div>
   );
 }

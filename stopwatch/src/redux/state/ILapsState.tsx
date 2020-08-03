@@ -15,6 +15,6 @@ export const emptyLapsList:lapsList = {
   minValueIndex:-1,
   maxValueIndex:-1,
 }
-export default interface IHaveLaps {
+export default interface ILapsState {
   laps:lapsList
 }

@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import Display from'./Display';
 import FormatMilliSeconds from '../converter/FormatMilliSeconds';
-import IHavePausedTime from '../redux/state/IHavePausedTime';
-import IHaveStartedTime from '../redux/state/IHaveStartedTime';
+import IPausedTimeState from '../redux/state/IPausedTimeState';
+import IStartedTimeState from '../redux/state/IStartedTimeState';
 import log, { ComponentsEnum } from './LogDebug';
 
 
 interface ElapsedTimeDisplayProps extends 
-  IHaveStartedTime,
-  IHavePausedTime{
+  IStartedTimeState,
+  IPausedTimeState{
 }
 
 export default function ElapsedTimeDisplay(props:ElapsedTimeDisplayProps)

@@ -1,2 +1,2 @@
-import IHavePausedTime from '../state/IHavePausedTime';
-export const pausedTimeSelector = (state: IHavePausedTime) => state.pausedTime;
+import IPausedTimeState from '../state/IPausedTimeState';
+export const pausedTimeSelector = (state: IPausedTimeState) => state.pausedTime;

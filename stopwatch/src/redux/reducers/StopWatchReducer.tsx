@@ -8,7 +8,7 @@ import UserAction,
   ResetAction } from '../actions/UserAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 import log, { ComponentsEnum } from '../../components/LogDebug';
-import { lapsList, emptyLapsList } from '../state/IHaveLaps';
+import { lapsList, emptyLapsList } from '../state/ILapsState';
 
 export function reducerStopWatch(state = initialState, action: UserAction): stopWatchState {
   log(ComponentsEnum.Redux, 'Reducer received action ' + action);
