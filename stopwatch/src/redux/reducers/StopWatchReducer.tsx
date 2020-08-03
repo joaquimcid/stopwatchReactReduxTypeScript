@@ -1,30 +1,24 @@
 
-import {initialState, stopWatchState } from '../state/StopWatchState';
-import UserAction, 
-{ StartAction, 
-  PauseAction, 
-  ContinueAction, 
-  NewLapAction, 
-  ResetAction } from '../actions/UserAction';
+import { initialState, stopWatchState } from '../state/StopWatchState';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 import log, { ComponentsEnum } from '../../components/LogDebug';
 import { lapsList, emptyLapsList } from '../state/ILapsState';
+import { Action } from 'redux';
+import { UserActionEnum } from '../actions/UserAction';
 
-export function reducerStopWatch(state = initialState, action: UserAction): stopWatchState {
+export function reducerStopWatch(state:stopWatchState = initialState, action: Action<UserActionEnum>): stopWatchState {
   log(ComponentsEnum.Redux, 'Reducer received action ' + action);
   log(ComponentsEnum.Redux, 'Reducer received action type ' + action.type);
 
-  // if (!state) return initialState;
-  // if (!action) return initialState;
-  switch (action) {
-    case StartAction: {
+  switch (action.type) {
+    case UserActionEnum.START: {
       return {
         status: StopWatchStatusEnum.STARTED,
         startedTime: Date.now(),
         laps: emptyLapsList,
       };
     }
-    case PauseAction:
+    case UserActionEnum.PAUSE:
       return {
           status: StopWatchStatusEnum.PAUSED,      
           startedTime: state.startedTime,
@@ -32,7 +26,7 @@ export function reducerStopWatch(state = initialState, action: UserAction): stop
           laps: state.laps,
         };
         
-    case ContinueAction:
+    case  UserActionEnum.CONTINUE:
       let updateStartedTime = state.startedTime + Date.now() - (state.pausedTime || 0);
       return {
           status: StopWatchStatusEnum.STARTED,
@@ -40,7 +34,7 @@ export function reducerStopWatch(state = initialState, action: UserAction): stop
           laps: state.laps,
         };
 
-    case NewLapAction:
+    case  UserActionEnum.NEWLAP:
       const currentLapTime = Date.now()-state.startedTime-state.laps.sumOfLaps;
       const newLap = {
         index: state.laps.records.length+1,
@@ -59,7 +53,7 @@ export function reducerStopWatch(state = initialState, action: UserAction): stop
           laps: newLapsList,
         };
 
-    case ResetAction:
+    case UserActionEnum.RESET:
       return initialState;
     default:
       return state
