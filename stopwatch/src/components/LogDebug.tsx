@@ -7,7 +7,7 @@ export enum ComponentsEnum {
   Redux="Redux",
   LoggerMiddleWare="LoggerMiddleWare",
 }
-const isDebugOnlyComponents:ComponentsEnum[] = [ComponentsEnum.ElapsedTimeDisplay];
+const isDebugOnlyComponents:ComponentsEnum[] = [ComponentsEnum.LoggerMiddleWare];
 
 export default function log(component:ComponentsEnum, message?: any, ...optionalParams: any[]): void {
   if (isDebugMode)
