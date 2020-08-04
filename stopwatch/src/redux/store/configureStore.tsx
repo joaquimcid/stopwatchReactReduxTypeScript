@@ -1,4 +1,4 @@
-import StopWatchReducer from '../reducers/StopWatchReducer';
+import StopWatchReducer from '../reducers/StopWatch/StopWatchReducer';
 import { loggerMiddleware } from '../middleWares/loggerMiddleware';
 import { applyMiddleware, createStore, Store } from 'redux';
 // import { ApplicationInitialState, ApplicationState } from '../state/ApplicationState';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
+import { StopWatchStatusEnum } from '../redux/reducers/StopWatch/StopWatchStatusEnum';
 import { useSelector } from 'react-redux';
 import { statusSelector } from '../redux/selectors/statusSelector';
 import { useDispatch } from 'react-redux'
