@@ -1,26 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { reducerStopWatch } from './redux/reducers/StopWatchReducer';
 import './styles/css/App.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import log from './components/LogDebug';
-import { ComponentsEnum } from './components/LogDebug';
-import { initialState } from './redux/state/StopWatchState';
+import { configureStore } from './redux/store/configureStore';
 
-var store = createStore(reducerStopWatch, initialState);
-
-store.subscribe(() => {
-  log(ComponentsEnum.Redux, "index.tsx -> GetState: ");
-  log(ComponentsEnum.Redux, store.getState()) 
-});
+// store.subscribe(() => {
+//   log(ComponentsEnum.Redux, "index.tsx -> GetState: ");
+//   log(ComponentsEnum.Redux, store.getState()) 
+// });
 
 ReactDOM.render(
   <div className="app">
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={configureStore()}>
       <App />
     </Provider>
   </React.StrictMode>

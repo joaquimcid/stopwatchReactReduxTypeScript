@@ -1,24 +1,52 @@
-
-import { initialState, stopWatchState } from '../state/StopWatchState';
+import {initialState, stopWatchState } from '../state/StopWatchState';
+import {IStopWatchAction, StopWatchActionType} from '../actions/StopWatchAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 import log, { ComponentsEnum } from '../../components/LogDebug';
 import { lapsList, emptyLapsList } from '../state/ILapsState';
-import { Action } from 'redux';
-import { UserActionEnum } from '../actions/UserAction';
 
-export function reducerStopWatch(state:stopWatchState = initialState, action: Action<UserActionEnum>): stopWatchState {
-  log(ComponentsEnum.Redux, 'Reducer received action ' + action);
-  log(ComponentsEnum.Redux, 'Reducer received action type ' + action.type);
+function isAllowedThisStateChange(state:StopWatchStatusEnum, actionType: StopWatchActionType):boolean {
+
+  if(state === StopWatchStatusEnum.INITIAL
+    && actionType === StopWatchActionType.START) return true;
+  // log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: INITIAL -> Dispatch(START)');
+
+  if(state === StopWatchStatusEnum.STARTED
+    && actionType === StopWatchActionType.NEWLAP) return true;
+  //   log(ComponentsEnum.Buttons, 'LAP_RESET_BTN: STARTED -> Dispatch(NEWLAP)');
+
+  if(state === StopWatchStatusEnum.STARTED
+    && actionType === StopWatchActionType.PAUSE) return true;
+  //     log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: STARTED -> Dispatch(PAUSE)');
+
+  if (state === StopWatchStatusEnum.PAUSED
+    && actionType === StopWatchActionType.RESET ) return true;
+  //   log(ComponentsEnum.Buttons, 'LAP_RESET_BTN: PAUSED -> Dispatch(RESET)');
+
+  if (state === StopWatchStatusEnum.PAUSED
+    && actionType === StopWatchActionType.CONTINUE) return true;
+  //     log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: PAUSED -> Dispatch(CONTINUE)');
+
+  log(ComponentsEnum.StopWatchReducer, `When status [${state}] is dispatched the NOT ALLOWED action[${actionType.toString()}]`);
+  return false;
+}
+
+export default function StopWatchReducer(state = initialState, action: IStopWatchAction): stopWatchState {
+  log(ComponentsEnum.StopWatchReducer, 'Reducer received action ' + action);
+  log(ComponentsEnum.StopWatchReducer, 'Reducer received action type ' + action.type);
+
+  if (!action || action.type.startsWith('@@redux/INIT')) return initialState;
+
+  if (!isAllowedThisStateChange(state.status, action.type)) return state;
 
   switch (action.type) {
-    case UserActionEnum.START: {
+    case StopWatchActionType.START: {
       return {
         status: StopWatchStatusEnum.STARTED,
         startedTime: Date.now(),
         laps: emptyLapsList,
       };
     }
-    case UserActionEnum.PAUSE:
+    case StopWatchActionType.PAUSE:
       return {
           status: StopWatchStatusEnum.PAUSED,      
           startedTime: state.startedTime,
@@ -26,7 +54,7 @@ export function reducerStopWatch(state:stopWatchState = initialState, action: Ac
           laps: state.laps,
         };
         
-    case  UserActionEnum.CONTINUE:
+    case StopWatchActionType.CONTINUE:
       let updateStartedTime = state.startedTime + Date.now() - (state.pausedTime || 0);
       return {
           status: StopWatchStatusEnum.STARTED,
@@ -34,7 +62,7 @@ export function reducerStopWatch(state:stopWatchState = initialState, action: Ac
           laps: state.laps,
         };
 
-    case  UserActionEnum.NEWLAP:
+    case StopWatchActionType.NEWLAP:
       const currentLapTime = Date.now()-state.startedTime-state.laps.sumOfLaps;
       const newLap = {
         index: state.laps.records.length+1,
@@ -53,7 +81,7 @@ export function reducerStopWatch(state:stopWatchState = initialState, action: Ac
           laps: newLapsList,
         };
 
-    case UserActionEnum.RESET:
+    case StopWatchActionType.RESET:
       return initialState;
     default:
       return state

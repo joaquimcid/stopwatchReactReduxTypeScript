@@ -3,8 +3,9 @@ import { StopWatchStatusEnum } from '../redux/reducers/StopWatchStatusEnum';
 import { useSelector } from 'react-redux';
 import { statusSelector } from '../redux/selectors/statusSelector';
 import { useDispatch } from 'react-redux'
-import UserAction, { UserActionEnum } from '../redux/actions/UserAction';
+import { StopWatchActionType } from '../redux/actions/StopWatchAction';
 import log, { ComponentsEnum } from './LogDebug';
+import UserAction from '../redux/actions/StopWatchAction';
 
 export default function Buttons() {
   const status = useSelector(statusSelector);
@@ -13,12 +14,12 @@ export default function Buttons() {
   function newLapOrResetClicked (status:StopWatchStatusEnum) {
     if (status === StopWatchStatusEnum.PAUSED) {
       log(ComponentsEnum.Buttons, 'LAP_RESET_BTN: PAUSED -> Dispatch(RESET)');
-      return dispatch(UserAction(UserActionEnum.RESET));
+      return dispatch(UserAction(StopWatchActionType.RESET));
     }
   
     if(status === StopWatchStatusEnum.STARTED) {
       log(ComponentsEnum.Buttons, 'LAP_RESET_BTN: STARTED -> Dispatch(NEWLAP)');
-      return dispatch(UserAction(UserActionEnum.NEWLAP));
+      return dispatch(UserAction(StopWatchActionType.NEWLAP));
     }
   };
   
@@ -27,19 +28,19 @@ export default function Buttons() {
     if(status === StopWatchStatusEnum.INITIAL)
     {
       log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: INITIAL -> Dispatch(START)');
-      return dispatch(UserAction(UserActionEnum.START));
+      return dispatch(UserAction(StopWatchActionType.START));
     }
   
     if (status === StopWatchStatusEnum.PAUSED)
     {
       log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: PAUSED -> Dispatch(CONTINUE)');
-      return dispatch(UserAction(UserActionEnum.CONTINUE));
+      return dispatch(UserAction(StopWatchActionType.CONTINUE));
     }
   
     if(status === StopWatchStatusEnum.STARTED)
     {
       log(ComponentsEnum.Buttons, 'START_PAUSE_BTN: STARTED -> Dispatch(PAUSE)');
-      return dispatch(UserAction(UserActionEnum.PAUSE));
+      return dispatch(UserAction(StopWatchActionType.PAUSE));
     }
   };
 
