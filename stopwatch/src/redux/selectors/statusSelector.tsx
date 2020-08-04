@@ -1,2 +1,3 @@
-import IStatusState from '../state/IStatusState';
-export const statusSelector = (state: IStatusState) => state.status
+import { iRootState } from "../state";
+
+export const statusSelector = (state: iRootState) => state.stopWatch.status

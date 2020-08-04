@@ -1,2 +1,2 @@
-import ILapsState from '../state/ILapsState';
-export const lapsSelector = (state: ILapsState) => state.laps;
+import { iRootState } from '../state/index';
+export const lapsSelector = (state: iRootState) => state.stopWatch.laps;

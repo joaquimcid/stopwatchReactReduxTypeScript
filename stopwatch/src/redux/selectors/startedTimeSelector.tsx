@@ -1,2 +1,3 @@
-import IStartedTimeState from '../state/IStartedTimeState';
-export const startedTimeSelector = (state: IStartedTimeState) => state.startedTime;
+import { iRootState } from "../state";
+
+export const startedTimeSelector = (state: iRootState) => state.stopWatch.startedTime;
