@@ -34,11 +34,10 @@ export default function StopWatchReducer(state = initialState, action: IStopWatc
   log(ComponentsEnum.StopWatchReducer, 'Reducer received action ' + action);
   log(ComponentsEnum.StopWatchReducer, 'Reducer received action type ' + action.type);
 
-  if (!action) return initialState;
+  if (!action || action.type.startsWith('@@redux/INIT')) return initialState;
 
   if (!isAllowedThisStateChange(state.status, action.type)) return state;
-  // if (!state) return initialState;
-  // if (!action) return initialState;
+
   switch (action.type) {
     case StopWatchActionType.START: {
       return {
