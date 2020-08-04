@@ -1,5 +1,5 @@
 import { stopWatchState, initialState } from '../state/StopWatchState';
-import IAction from '../actions/IAction';
+import {IStopWatchAction} from '../actions/StopWatchAction';
 
 const state:stopWatchState = initialState;
 
@@ -7,7 +7,7 @@ function whenGetState():stopWatchState {
   return state;
 }
 
-function whenDispatch(action: IAction):void {
+function whenDispatch(action: IStopWatchAction):void {
   
 }
 
@@ -17,6 +17,6 @@ function whenSubscribe(callback: Function):void {
 
 export const customStore = {
   getState: () => whenGetState,
-  dispatch: (action: IAction) => whenDispatch(action),
+  dispatch: (action: IStopWatchAction) => whenDispatch(action),
   subscribe: (callback: Function) => whenSubscribe(callback),
 }

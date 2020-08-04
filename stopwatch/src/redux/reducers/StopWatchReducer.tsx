@@ -1,25 +1,24 @@
 import {initialState, stopWatchState } from '../state/StopWatchState';
-import {UserActionType} from '../actions/UserAction';
+import {IStopWatchAction, StopWatchActionType} from '../actions/StopWatchAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 import log, { ComponentsEnum } from '../../components/LogDebug';
 import { lapsList, emptyLapsList } from '../state/ILapsState';
-import IAction from '../actions/IAction';
 
-export default function StopWatchReducer(state = initialState, action: IAction): stopWatchState {
+export default function StopWatchReducer(state = initialState, action: IStopWatchAction): stopWatchState {
   log(ComponentsEnum.Redux, 'Reducer received action ' + action);
   log(ComponentsEnum.Redux, 'Reducer received action type ' + action.type);
 
   // if (!state) return initialState;
   // if (!action) return initialState;
   switch (action.type) {
-    case UserActionType.START: {
+    case StopWatchActionType.START: {
       return {
         status: StopWatchStatusEnum.STARTED,
         startedTime: Date.now(),
         laps: emptyLapsList,
       };
     }
-    case UserActionType.PAUSE:
+    case StopWatchActionType.PAUSE:
       return {
           status: StopWatchStatusEnum.PAUSED,      
           startedTime: state.startedTime,
@@ -27,7 +26,7 @@ export default function StopWatchReducer(state = initialState, action: IAction):
           laps: state.laps,
         };
         
-    case UserActionType.CONTINUE:
+    case StopWatchActionType.CONTINUE:
       let updateStartedTime = state.startedTime + Date.now() - (state.pausedTime || 0);
       return {
           status: StopWatchStatusEnum.STARTED,
@@ -35,7 +34,7 @@ export default function StopWatchReducer(state = initialState, action: IAction):
           laps: state.laps,
         };
 
-    case UserActionType.NEWLAP:
+    case StopWatchActionType.NEWLAP:
       const currentLapTime = Date.now()-state.startedTime-state.laps.sumOfLaps;
       const newLap = {
         index: state.laps.records.length+1,
@@ -54,7 +53,7 @@ export default function StopWatchReducer(state = initialState, action: IAction):
           laps: newLapsList,
         };
 
-    case UserActionType.RESET:
+    case StopWatchActionType.RESET:
       return initialState;
     default:
       return state
