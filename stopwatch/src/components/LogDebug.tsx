@@ -4,9 +4,10 @@ export enum ComponentsEnum {
   ElapsedTimeDisplay ="ElapsedTimeDisplay",
   LapsList="LapsList",
   Redux="Redux",
+  StopWatchReducer="StopWatchReducer",
   LoggerMiddleWare="LoggerMiddleWare",
 }
-const isDebugOnlyComponents:ComponentsEnum[] = [ComponentsEnum.LoggerMiddleWare];
+const isDebugOnlyComponents:ComponentsEnum[] = [ComponentsEnum.LoggerMiddleWare, ComponentsEnum.StopWatchReducer];
 
 function isValid(component:ComponentsEnum):boolean {
   if (!isDebugMode) return false;
