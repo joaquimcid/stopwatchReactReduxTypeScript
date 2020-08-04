@@ -35,7 +35,7 @@ function isAllowedThisStateChange(state:StopWatchStatusEnum, actionType: StopWat
 
 export default function StopWatchReducer(state = initialState, action: IStopWatchAction): stopWatchState {
   logGroup(ComponentsEnum.StopWatchReducer, `Reducer received action ${action.type}`);
-  log(ComponentsEnum.StopWatchReducer, state);
+  log(ComponentsEnum.StopWatchReducer, 'Current state value:', state);
   // if (!action || action.type.startsWith('@@redux/INIT')) return initialState;
   let result:stopWatchState = state;
 
@@ -74,10 +74,11 @@ export default function StopWatchReducer(state = initialState, action: IStopWatc
         result = initialState;
         break;
       default:
+        result =  state
         break;
-        //return state
     }
   }
+  log(ComponentsEnum.StopWatchReducer, 'Return state value:', state);
   logGroupEnd(ComponentsEnum.StopWatchReducer);
   return result;
 }
