@@ -1,12 +1,11 @@
-
 import {initialState, stopWatchState } from '../state/StopWatchState';
 import {UserActionType} from '../actions/UserAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 import log, { ComponentsEnum } from '../../components/LogDebug';
 import { lapsList, emptyLapsList } from '../state/ILapsState';
-import { Action } from 'redux';
+import IAction from '../actions/IAction';
 
-export function reducerStopWatch(state = initialState, action: Action<UserActionType>): stopWatchState {
+export default function StopWatchReducer(state = initialState, action: IAction): stopWatchState {
   log(ComponentsEnum.Redux, 'Reducer received action ' + action);
   log(ComponentsEnum.Redux, 'Reducer received action type ' + action.type);
 

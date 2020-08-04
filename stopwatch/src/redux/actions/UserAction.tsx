@@ -1,4 +1,4 @@
-import { Action } from "redux";
+import IAction from "./IAction";
 
 export enum UserActionType {
   START = "START",
@@ -8,6 +8,6 @@ export enum UserActionType {
   RESET = "RESET",
 }
 
-export default function UserAction(actionType: UserActionType): Action<UserActionType> {
+export default function UserAction(actionType: UserActionType): IAction {
   return {type: actionType};
 }

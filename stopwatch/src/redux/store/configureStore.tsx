@@ -1,11 +1,11 @@
-import { reducerStopWatch } from '../reducers/StopWatchReducer';
+import StopWatchReducer from '../reducers/StopWatchReducer';
 import { loggerMiddleware } from '../middleWares/loggerMiddleware';
-import { Action, applyMiddleware, createStore, Store } from 'redux';
-// import { Action, applyMiddleware, compose, createStore, Store } from 'redux';
+import { applyMiddleware, createStore, Store } from 'redux';
+// import { ApplicationInitialState, ApplicationState } from '../state/ApplicationState';
+import IAction from '../actions/IAction';
 import { initialState } from '../state/StopWatchState';
-import { UserActionType } from '../actions/UserAction';
 
-export function configureStore(): Store<any, Action<UserActionType>> {
+export function configureStore(): Store<any, IAction> {
   // const enhancers: never[] = [];
   // const middleware = [loggerMiddleware];
 
@@ -16,5 +16,8 @@ export function configureStore(): Store<any, Action<UserActionType>> {
   // );
   // return store;
 
-  return createStore(reducerStopWatch, initialState, applyMiddleware(loggerMiddleware));
+  // const initState:ApplicationState = ApplicationInitialState; 
+
+  // return createStore(reducer,  initState, applyMiddleware(loggerMiddleware));
+  return createStore(StopWatchReducer, initialState, applyMiddleware(loggerMiddleware));
 }
