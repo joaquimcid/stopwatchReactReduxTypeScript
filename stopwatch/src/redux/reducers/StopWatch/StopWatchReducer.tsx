@@ -1,8 +1,8 @@
-import {initialState, stopWatchState } from '../../state/StopWatchState';
+import {initialState, stopWatchState } from '../../state/StopWatch/StopWatchState';
 import {IStopWatchAction, StopWatchActionType} from '../../actions/StopWatchAction';
 import { StopWatchStatusEnum } from './StopWatchStatusEnum';
 import log, { ComponentsEnum } from '../../../components/LogDebug';
-import { lapsList, emptyLapsList } from '../../state/ILapsState';
+import { lapsList, emptyLapsList } from '../../state/StopWatch/ILapsState';
 
 function isAllowedThisStateChange(state:StopWatchStatusEnum, actionType: StopWatchActionType):boolean {
 

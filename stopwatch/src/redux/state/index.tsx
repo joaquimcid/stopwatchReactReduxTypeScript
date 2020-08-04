@@ -1,4 +1,4 @@
-import { initialState, stopWatchState } from './StopWatchState';
+import { initialState, stopWatchState } from './StopWatch/StopWatchState';
 
 export default function rootInitialState(stopWatchStateValue?:stopWatchState):  {  stopWatch: stopWatchState } {
   return {

@@ -1,4 +1,4 @@
-import { StopWatchStatusEnum } from '../reducers/StopWatch/StopWatchStatusEnum';
+import { StopWatchStatusEnum } from '../../reducers/StopWatch/StopWatchStatusEnum';
 import IStatusState from './IStatusState';
 import IStartedTimeState from './IStartedTimeState';
 import IPausedTimeState from './IPausedTimeState';

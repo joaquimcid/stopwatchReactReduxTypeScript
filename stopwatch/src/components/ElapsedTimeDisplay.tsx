@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Display from'./Display';
 import FormatMilliSeconds from '../converter/FormatMilliSeconds';
-import IPausedTimeState from '../redux/state/IPausedTimeState';
-import IStartedTimeState from '../redux/state/IStartedTimeState';
+import IPausedTimeState from '../redux/state/StopWatch/IPausedTimeState';
+import IStartedTimeState from '../redux/state/StopWatch/IStartedTimeState';
 import log, { ComponentsEnum } from './LogDebug';
 
 

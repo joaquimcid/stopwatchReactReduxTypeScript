@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { UserActionEnum } from '../actions/UserAction';
-import { stopWatchState, initialState } from '../state/StopWatchState';
+import { stopWatchState, initialState } from '../state/StopWatch/StopWatchState';
 import {IStopWatchAction} from '../actions/StopWatchAction';
 
 const state:stopWatchState = initialState;
